@@ -1,9 +1,9 @@
 No-brainer Dart helpers for boilerplate methods implementation.
 
-    class Bar extends Boilerplate {
+    class Foo extends Boilerplate {
       final int i;
       final int j
-      Bar(this.i, this.j);   // .toString, .hashCode, .operator== with no extra effort.
+      Foo(this.i, this.j);   // .toString, .hashCode, .operator== with no extra effort.
     }
     
 # What is Boilerplate?
