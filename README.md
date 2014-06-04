@@ -13,13 +13,13 @@ No-brainer Dart helpers for boilerplate methods implementation ([get it with pub
 It implements them by passing the *public fields* values through to [collection/equality.dart](https://github.com/dart-lang/bleeding_edge/tree/master/dart/pkg/collection), which performs the equality / hashing / toString for us.
 
 There's two variants:
-* `Boilerplate` uses mirrors to get the list of fields and their values. This means you need to preserve metadata of your class with `@MirrorsUsed` annotations.
+* `Boilerplate` uses mirrors to get the list of fields and their values. This means you need to preserve metadata of your class with `@MirrorsUsed` annotations (see example below).
 * `ExplicitBoilerplate` requires you to specify the fields and class name explicitly. It doesn't use mirrors but some boilerplate is needed (although smaller than the methods it helps implement).
 
 # Limitations
 
 These two classes are not designed for every possible use case, as they have the following limitations:
-* `Boilerplate` Only uses public fields by default,
+* `Boilerplate` Only uses public fields by default (but you can still override `get fields`),
 * No special handling of reference cycles: user must avoid them responsibly,
 * Not optimized for speed (but some care is taken to cache costly mirror results). If you need fast boilerplate methods, please consider implementing them with [quiver-dart](https://github.com/google/quiver-dart).
 * Subsequent calls of hashCode on an object with mutable fields may yield different values (well, just as in Java),
