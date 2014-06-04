@@ -2,9 +2,10 @@ No-brainer Dart helpers for boilerplate methods implementation ([get it with pub
 
     class Foo extends Boilerplate {
       final int i;         // .toString, .hashCode, .operator==
-      final int j;         // with no extra effort.
+      final List<int> js;  // with no extra effort.
       Foo(this.i, this.j);
     }
+    assert(new Foo(1, [2, 3]) == new Foo(1, [2, 3]));
     
 # What is Boilerplate?
 
@@ -19,6 +20,7 @@ There's two variants:
 # Limitations
 
 These two classes are not designed for every possible use case, as they have the following limitations:
+* Equality only holds between instances of the exact same runtime type.
 * `Boilerplate` Only uses public fields by default (but you can still override `get fields`),
 * No special handling of reference cycles: user must avoid them responsibly,
 * Not optimized for speed (but some care is taken to cache costly mirror results). If you need fast boilerplate methods, please consider implementing them with [quiver-dart](https://github.com/google/quiver-dart).
