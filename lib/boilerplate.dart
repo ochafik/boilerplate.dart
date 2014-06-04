@@ -72,7 +72,8 @@ abstract class Boilerplate {
    * Get the map of field names to field values.
    *
    * Override this to avoid reflection when [hashCode] / operator== speed is a
-   * concern, or when preserving mirror metadata is not an option.
+   * concern, or when preserving mirror metadata is not an option (you
+   * should also consider [ExplicitBoilerplate] in the latter case).
    *
    * For example:
    *
@@ -96,7 +97,8 @@ abstract class Boilerplate {
    * Get the short name of the class for use in [toString].
    *
    * Override this to avoid reflection when [toString] speed is a
-   * concern, or when preserving mirror metadata is not an option.
+   * concern, or when preserving mirror metadata is not an option (you
+   * should also consider [ExplicitBoilerplate] in the latter case).
    *
    * For example:
    *
