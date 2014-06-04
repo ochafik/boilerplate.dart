@@ -8,13 +8,13 @@ It implements them by passing the public fields values through to collection/equ
 
 Boilerplate can get the list of fields to different ways:
 - Using mirrors; This means you need to preserve metadata of your class with `@MirrorsUsed` annotations.
-- Using an explicit fields map getter: you don't need to preserve mirror metadata, but some boilerplate is needed (although smaller than the methods it helps implement).
+- Using an explicit fields map getter: you don't need to preserve mirror metadata, but some boilerplate is needed (although smaller than the methods it helps implement). Please extend `ExplicitBoilerplate` instead of `Boilerplate` to avoid mirrors completely.
 
 ## Example with mirrors
 
     @MirrorsUsed(targets: const[Foo, Bar], override: "*")
     import 'dart:mirrors';
-    import 'boilerplate.dart';
+    import 'package:boilerplate/boilerplate.dart';
 
     class Bar extends Boilerplate {
       final int i;
@@ -35,9 +35,9 @@ Boilerplate can get the list of fields to different ways:
 
 ## Example without mirrors
 
-    import 'boilerplate.dart';
+    import 'package:boilerplate/explicit_boilerplate.dart';
 
-    class Bar extends Boilerplate {
+    class Bar extends ExplicitBoilerplate {
       final int i;
       Bar(this.i);
       @override get fields => { "i": i };
