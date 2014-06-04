@@ -4,7 +4,7 @@ No-brainer Dart helpers for boilerplate methods implementation (hashCode, operat
 
 Boilerplate saves you those cumbersome and error-prone hashCode, operator== and toString methods in Dart.
 
-It implements them by passing the public fields values through to collection/equality.dart, which performs the equality / hashing / toString for us.
+It implements them by passing the public fields values through to [collection/equality.dart](https://github.com/dart-lang/bleeding_edge/tree/master/dart/pkg/collection), which performs the equality / hashing / toString for us.
 
 Boilerplate can get the list of fields to different ways:
 - Using mirrors; This means you need to preserve metadata of your class with `@MirrorsUsed` annotations.
