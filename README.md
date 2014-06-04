@@ -1,14 +1,28 @@
-No-brainer Dart helpers for boilerplate methods implementation (hashCode, operator==, toString).
+No-brainer Dart helpers for boilerplate methods implementation.
 
+    class Bar extends Boilerplate {
+      final int i;
+      final int j
+      Bar(this.i, this.j);   // .toString, .hashCode, .operator== with no extra effort.
+    }
+    
 # What is Boilerplate?
 
-Boilerplate saves you those cumbersome and error-prone hashCode, operator== and toString methods in Dart.
+`Boilerplate` saves you those cumbersome and error-prone [hashCode](https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart-core.Object#id_hashCode), [operator==](https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart-core.Object#id_==) and [toString](https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart-core.Object#id_toString) methods in Dart.
 
-It implements them by passing the public fields values through to [collection/equality.dart](https://github.com/dart-lang/bleeding_edge/tree/master/dart/pkg/collection), which performs the equality / hashing / toString for us.
+It implements them by passing the *public fields* values through to [collection/equality.dart](https://github.com/dart-lang/bleeding_edge/tree/master/dart/pkg/collection), which performs the equality / hashing / toString for us.
 
-Boilerplate can get the list of fields to different ways:
-- Using mirrors; This means you need to preserve metadata of your class with `@MirrorsUsed` annotations.
-- Using an explicit fields map getter: you don't need to preserve mirror metadata, but some boilerplate is needed (although smaller than the methods it helps implement). Please extend `ExplicitBoilerplate` instead of `Boilerplate` to avoid mirrors completely.
+There's two variants:
+- `Boilerplate` uses mirrors to get the list of fields and their values. This means you need to preserve metadata of your class with `@MirrorsUsed` annotations.
+- `ExplicitBoilerplate` requires you to specify the fields and class name explicitly. It doesn't use mirrors but some boilerplate is needed (although smaller than the methods it helps implement).
+
+# Limitations
+
+These two classes are not designed for every possible use case, as they have the following limitations:
+- `Boilerplate` Only uses public fields by default,
+- No special handling of reference cycles: user must avoid them responsibly,
+- Not optimized for speed (but some care is taken to cache costly mirror results). If you need fast boilerplate methods, please consider implementing them with [quiver-dart](https://github.com/google/quiver-dart).
+- Subsequent calls of hashCode on an object with mutable fields may yield different values (well, just as in Java),
 
 ## Example with mirrors
 
@@ -58,12 +72,3 @@ Note that Boilerplate can be safely mixed in at any level of the class hierarchy
 
      class A extends Boilerplate {}
      class B extends A with Boilerplate {}
-
-# Limitations
-
-Boilerplate is not designed for every possible use case, as it has the following limitations:
-- Only uses public fields by default,
-- No special handling of reference cycles: user must avoid them responsibly,
-- Not optimized for speed (but some care is taken to cache costly mirror results),
-- Subsequent calls of hashCode on an object with mutable fields may yield different values (well, just as in Java),
-- Requires mirrors (with proper MirrorsUsed annotation) *or* explicit definition of fields and className.
