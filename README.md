@@ -1,4 +1,4 @@
-No-brainer Dart helpers for boilerplate methods implementation.
+No-brainer Dart helpers for boilerplate methods implementation ([get it with pub](http://pub.dartlang.org/packages/boilerplate)).
 
     class Foo extends Boilerplate {
       final int i;         // .toString, .hashCode, .operator==
