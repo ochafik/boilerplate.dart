@@ -1,6 +1,6 @@
 No-brainer Dart helpers for boilerplate methods implementation (hashCode, operator==, toString).
 
-== What is Boilerplate? ==
+# What is Boilerplate?
 
 Boilerplate saves you those cumbersome and error-prone hashCode, operator== and toString methods in Dart.
 
@@ -10,7 +10,7 @@ Boilerplate can get the list of fields to different ways:
 - Using mirrors; This means you need to preserve metadata of your class with `@MirrorsUsed` annotations.
 - Using an explicit fields map getter: you don't need to preserve mirror metadata, but some boilerplate is needed (although smaller than the methods it helps implement).
 
-== Example with mirrors ==
+## Example with mirrors
 
     @MirrorsUsed(targets: const[Foo, Bar], override: "*")
     import 'dart:mirrors';
@@ -33,7 +33,7 @@ Boilerplate can get the list of fields to different ways:
     assert(new Bar(1) == new Bar(1));
     assert(new Bar(1) != new Bar(2));
 
-== Example without mirrors ==
+## Example without mirrors
 
     import 'boilerplate.dart';
 
@@ -52,14 +52,14 @@ Boilerplate can get the list of fields to different ways:
       @override get className => "Foo";
     }
 
-== Boilerplate can be mixed in ==
+## Boilerplate can be mixed in
 
 Note that Boilerplate can be safely mixed in at any level of the class hierarchy:
 
      class A extends Boilerplate {}
      class B extends A with Boilerplate {}
 
-= Limitations =
+# Limitations
 
 Boilerplate is not designed for every possible use case, as it has the following limitations:
 - Only uses public fields by default,
