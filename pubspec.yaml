@@ -1,0 +1,8 @@
+name: boilerplate
+author: Olivier Chafik
+description: A simple Boilerplate mixin that implements hashCode, operator== and toString based on public fields.
+homepage: https://github.com/ochafik/boilerplate.dart
+documentation: https://github.com/ochafik/boilerplate.dart
+dependencies:
+  collection: any
+  unittest: any
