@@ -1,4 +1,4 @@
-library copy_boilerplate;
+library clone_boilerplate;
 
 @MirrorsUsed(symbols: const["copy", "call"], override: "*")
 import 'dart:mirrors';
@@ -29,11 +29,12 @@ class _InvocationBuilder {
   Map namedArguments = {};
 }
 
-typedef void _InvocationUpdater(InstanceMirror originalMirror, Invocation invocation, _InvocationBuilder builder);
+typedef bool _InvocationUpdater(InstanceMirror originalMirror, Invocation invocation, _InvocationBuilder builder);
 
 class _CopyTypeMetadata {
   ClassMirror classMirror;
   MethodMirror constructorMirror;
+  Set<Symbol> paramNames = new Set();
   
   List<_InvocationUpdater> invocationUpdaters = [];
   
@@ -49,10 +50,13 @@ class _CopyTypeMetadata {
 
     for (ParameterMirror param in constructorMirror.parameters) {
       Symbol paramName = param.simpleName;
+      paramNames.add(paramName);
       invocationUpdaters.add((originalMirror, invocation, builder) {
-        dynamic value; 
+        dynamic value;
+        bool usedSomeArgument = false;
         if (invocation.namedArguments.containsKey(paramName)) {
           value = invocation.namedArguments[paramName];
+          usedSomeArgument = true;
         } else {
           value = originalMirror.getField(paramName).reflectee;
         }
@@ -61,6 +65,7 @@ class _CopyTypeMetadata {
         } else {
           builder.positionalArguments.add(value);
         }
+        return usedSomeArgument;
       });
     }
   }
@@ -78,8 +83,16 @@ class _Copier extends Function {
     InstanceMirror originalMirror = reflect(original);  
     _InvocationBuilder builder = new _InvocationBuilder();
     
+    int usedArgumentCount = 0;
     for (_InvocationUpdater updater in metadata.invocationUpdaters) {
-      updater(originalMirror, i, builder);
+      if (updater(originalMirror, i, builder)) {
+        usedArgumentCount++;
+      }
+    }
+    if (usedArgumentCount != i.namedArguments.length) {
+      Set<Symbol> unusedNamedArguments = new Set.from(i.namedArguments.keys)..removeAll(metadata.paramNames);
+      throw new _CopyError("Named arguments don't match any argument in the constructor: "
+          + unusedNamedArguments.toList().map((s) => MirrorSystem.getName(s)).join(", "));
     }
     
     return metadata.classMirror
