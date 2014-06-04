@@ -71,7 +71,7 @@ abstract class Boilerplate {
   /**
    * Get the map of field names to field values.
    *
-   * Override this to avoid reflection when hashCode / operator== speed is a
+   * Override this to avoid reflection when [hashCode] / operator== speed is a
    * concern, or when preserving mirror metadata is not an option.
    *
    * For example:
