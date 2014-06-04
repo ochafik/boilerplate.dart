@@ -72,3 +72,8 @@ Note that Boilerplate can be safely mixed in at any level of the class hierarchy
 
      class A extends Boilerplate {}
      class B extends A with Boilerplate {}
+
+# TODO
+
+- Wait for more comments on (Issue 19181](https://code.google.com/p/dart/issues/detail?id=19181),
+- Publish on pub
