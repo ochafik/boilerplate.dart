@@ -75,5 +75,4 @@ Note that Boilerplate can be safely mixed in at any level of the class hierarchy
 
 # TODO
 
-- Wait for more comments on (Issue 19181](https://code.google.com/p/dart/issues/detail?id=19181),
-- Publish on pub
+- Watch for more suggrestions on [Issue 19181](https://code.google.com/p/dart/issues/detail?id=19181),
