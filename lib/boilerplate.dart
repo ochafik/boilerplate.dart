@@ -4,6 +4,7 @@ library boilerplate;
   symbols: const[
     "class",
     "className",
+    "copy", // See copy_boilerplate.dart
     "fields",
     "hashCode",
     "runtimeType"],
