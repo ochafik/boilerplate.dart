@@ -1,16 +1,16 @@
 No-brainer Dart helpers for boilerplate methods implementation ([get it with pub](http://pub.dartlang.org/packages/boilerplate)).
-
-    import 'package:boilerplate/boilerplate.dart';
-    class Foo extends Boilerplate {
-      final int i;                 // .toString, .hashCode, .operator==
-      final List<int> js;          // and copy({ i, js })
-      Foo(this.i, this.js);        // with no extra effort.
-    }
-    var foo = new Foo(1, [2, 3]);
-    assert(foo == new Foo(1, [2, 3]));
-    print(foo);                    // "Foo { i: 1, js: [2, 3] }"
-    print(foo.copy(i: 1, js: [])); // "Foo { i: 1, js: [] }"
-
+```java
+import 'package:boilerplate/boilerplate.dart';
+class Foo extends Boilerplate {
+  final int i;                 // .toString, .hashCode, .operator==
+  final List<int> js;          // and copy({ i, js })
+  Foo(this.i, this.js);        // with no extra effort.
+}
+var foo = new Foo(1, [2, 3]);
+assert(foo == new Foo(1, [2, 3]));
+print(foo);                    // "Foo { i: 1, js: [2, 3] }"
+print(foo.copy(i: 1, js: [])); // "Foo { i: 1, js: [] }"
+```
 These methods bring Dart classes closer to Scala case classes (although immutability is not enforced).
 
 # What is Boilerplate?
@@ -39,61 +39,67 @@ These two classes are not designed for every possible use case, as they have the
 
 ## Example with mirrors
 
-    @MirrorsUsed(targets: const[Foo, Bar], override: "*")
-    import 'dart:mirrors';
-    import 'package:boilerplate/boilerplate.dart';
+```java
+@MirrorsUsed(targets: const[Foo, Bar], override: "*")
+import 'dart:mirrors';
+import 'package:boilerplate/boilerplate.dart';
 
-    class Bar extends Boilerplate {
-      final int i;
-      Bar(this.i);
-    }
+class Bar extends Boilerplate {
+  final int i;
+  Bar(this.i);
+}
 
-    class Foo extends Bar {
-      final int j;
-      final String s;
-      Foo(int i, this.j, this.s): super(i);
-    }
+class Foo extends Bar {
+  final int j;
+  final String s;
+  Foo(int i, this.j, this.s): super(i);
+}
 
-    var bar = new Bar(1);
-    var foo = new Foo(1, 2, "3");
-    print(bar);  // "Bar { i: 1 }"
-    print(foo);  // "Foo { i: 1, j: 2, s: 3 }"
+var bar = new Bar(1);
+var foo = new Foo(1, 2, "3");
+print(bar);  // "Bar { i: 1 }"
+print(foo);  // "Foo { i: 1, j: 2, s: 3 }"
 
-    assert(bar == new Bar(1));
-    assert(bar != new Bar(2));
+assert(bar == new Bar(1));
+assert(bar != new Bar(2));
 
-    assert(bar == bar.copy());
-    assert(new Bar(2) == bar.copy(i: 2));
+assert(bar == bar.copy());
+assert(new Bar(2) == bar.copy(i: 2));
+```
 
 ## Example without mirrors
 
-    import 'package:boilerplate/explicit_boilerplate.dart';
+```java
+import 'package:boilerplate/explicit_boilerplate.dart';
 
-    class Bar extends ExplicitBoilerplate {
-      final int i;
+class Bar extends ExplicitBoilerplate {
+  final int i;
 
-      Bar(this.i);
+  Bar(this.i);
 
-      @override get fields => { "i": i };
-      @override get className => "Bar";
-    }
+  @override get fields => { "i": i };
+  @override get className => "Bar";
+}
 
-    class Foo extends Bar {
-      final int j;
-      final String s;
+class Foo extends Bar {
+  final int j;
+  final String s;
 
-      Foo(int i, this.j, this.s): super(i);
+  Foo(int i, this.j, this.s): super(i);
 
-      @override get fields => { "i": i, "j": j, "s": s };
-      @override get className => "Foo";
-    }
+  @override get fields => { "i": i, "j": j, "s": s };
+  @override get className => "Foo";
+}
+```
 
 ## Boilerplate can be mixed in
 
 Note that `Boilerplate` and `ExplicitBoileplate` can be safely mixed in at any level of the class hierarchy:
 
-     class A extends Boilerplate {}
-     class B extends A with Boilerplate {}
+```java
+class A extends Boilerplate {}
+class B extends A with Boilerplate {}
+```
 
 # TODO
 
