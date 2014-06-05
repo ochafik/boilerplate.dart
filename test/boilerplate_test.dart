@@ -180,17 +180,16 @@ void main() {
 
       test("supports combinations of positional and named constructor arguments", () {
         var a = new A(i: 10, j: 20);
-        print(a);
-        print(a.copy(i: 100));
-        print(a.copy(i: 100, j: 30));
+        expect(new A(i: 100, j: 20), equals(a.copy(i: 100)));
+        expect(new A(i: 100, j: 30), equals(a.copy(i: 100, j: 30)));
           
         var b = new B(10, j: 20);
-        print(b);
-        print(b.copy(i: 100));
+        expect(new B(100, j: 20), equals(b.copy(i: 100)));
+        expect(new B(100, j: 30), equals(b.copy(i: 100, j: 30)));
       
         var c = new C(10, 20);
-        print(c);
-        print(c.copy(i: 100));
+        expect(new C(100, 20), equals(c.copy(i: 100)));
+        expect(new C(100, 30), equals(c.copy(i: 100, j: 30)));
       });
 
       test("throws on unknown named params", () {
