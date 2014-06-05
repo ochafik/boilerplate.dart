@@ -1,6 +1,6 @@
 No-brainer Dart helpers for boilerplate methods implementation ([get it with pub](http://pub.dartlang.org/packages/boilerplate)).
 ```java
-import "package:boilerplate/boilerplate.dart";
+import 'package:boilerplate/boilerplate.dart';
 class Foo extends Boilerplate {
   final int i;                 // .toString, .hashCode, .operator==
   final List<int> js;          // and copy({ i, js })
@@ -41,8 +41,8 @@ These two classes are not designed for every possible use case, as they have the
 
 ```java
 @MirrorsUsed(targets: const[Foo, Bar], override: "*")
-import "dart:mirrors";
-import "package:boilerplate/boilerplate.dart";
+import 'dart:mirrors';
+import 'package:boilerplate/boilerplate.dart';
 
 class Bar extends Boilerplate {
   final int i;
@@ -70,7 +70,7 @@ assert(new Bar(2) == bar.copy(i: 2));
 ## Example without mirrors
 
 ```java
-import "package:boilerplate/explicit_boilerplate.dart";
+import 'package:boilerplate/explicit_boilerplate.dart';
 
 class Bar extends ExplicitBoilerplate {
   final int i;
