@@ -1,4 +1,4 @@
-library boilerplate;
+library boilerplate.mirrors;
 
 @MirrorsUsed(
   symbols: const[
@@ -12,7 +12,7 @@ library boilerplate;
   override: "*")
 import 'dart:mirrors';
 
-import 'explicit_boilerplate.dart';
+import 'boilerplate_utils.dart';
 
 part 'copier.dart';
 part 'mirror_utils.dart';

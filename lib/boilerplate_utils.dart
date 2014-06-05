@@ -1,5 +1,8 @@
-part of boilerplate.explicit;
+library boilerplate.utils;
 
+import 'package:collection/equality.dart';
+
+/// Utilities used by both explicit and mirrors-based boilerplates.
 class BoilerplateUtils {
 
   /// Equality object used to compare fields.

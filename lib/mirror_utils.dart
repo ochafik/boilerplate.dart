@@ -1,4 +1,4 @@
-part of boilerplate;
+part of boilerplate.mirrors;
 
 /// Some Mirror-related utilities used in the library.
 class _MirrorUtils {

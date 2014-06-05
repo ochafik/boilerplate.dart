@@ -1,4 +1,4 @@
-part of boilerplate;
+part of boilerplate.mirrors;
 
 class _TypeMetadataCache {
 

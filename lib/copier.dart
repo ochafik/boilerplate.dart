@@ -1,4 +1,4 @@
-part of boilerplate;
+part of boilerplate.mirrors;
 
 /// Error thrown when [Boilerplate.copy] fails.
 class CopyError extends Error {

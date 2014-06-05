@@ -1,8 +1,6 @@
 library boilerplate.explicit;
 
-import 'package:collection/equality.dart';
-
-part 'boilerplate_utils.dart';
+import 'boilerplate_utils.dart';
 
 /**
  * Mixin that implements hashCode, operator== and toString based on public
