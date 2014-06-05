@@ -24,7 +24,7 @@ There's two variants:
 
   This means you need to preserve metadata of your class with `@MirrorsUsed` annotations (see example below).
 
-  `Boilerplate` also adds a `copy` method [as in Scala case classes](http://www.scala-lang.org/old/node/2075), which creates a copy with the default constructor using the same field values as the original, except for the named argument overrides.
+  `Boilerplate` also adds a `copy` method [as in Scala case classes](http://www.scala-lang.org/old/node/2075), which creates a copy with the default constructor using the same field values as the original, except for the provided named argument overrides.
 
 * `ExplicitBoilerplate` requires you to specify the fields and class name explicitly. It doesn't use mirrors but some boilerplate is needed (although smaller than the methods it helps implement).
 
