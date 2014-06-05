@@ -4,7 +4,7 @@ No-brainer Dart helpers for boilerplate methods implementation ([get it with pub
     class Foo extends Boilerplate {
       final int i;         // .toString, .hashCode, .operator==
       final List<int> js;  // with no extra effort.
-      Foo(this.i, this.j);
+      Foo(this.i, this.js);
     }
     var foo = new Foo(1, [2, 3]);
     assert(foo == new Foo(1, [2, 3]));
