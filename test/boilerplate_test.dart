@@ -76,6 +76,10 @@ class D extends Boilerplate {
   D();
 }
 
+class X extends Boilerplate {
+  int x;
+}
+
 void main() {
   group("Boilerplate", () {
     group("toString()", () {
@@ -195,6 +199,15 @@ void main() {
       test("throws on unknown named params", () {
         expect(() => new A().copy(x: 100), throwsA(new isInstanceOf<CopyError>()));
         expect(() => new D().copy(i: 100), throwsA(new isInstanceOf<CopyError>()));
+      });
+
+      test("throws when there's no default constructor", () {
+        expect(() => new X().copy(x: 100), throwsA(new isInstanceOf<CopyError>()));
+      });
+
+      test("can't be misused", () {
+        dynamic copy = new X().copy;
+        expect(() => copy.blah, throwsA(new isInstanceOf<NoSuchMethodError>()));
       });
     });
   });
