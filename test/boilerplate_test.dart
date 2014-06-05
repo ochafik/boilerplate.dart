@@ -1,4 +1,4 @@
-@MirrorsUsed(targets: const[MirrorFoo, MirrorBar], override: "*")
+@MirrorsUsed(targets: const[Foo, Bar], override: "*")
 import 'dart:mirrors';
 import 'package:unittest/unittest.dart';
 import 'package:boilerplate/boilerplate.dart';
@@ -13,27 +13,27 @@ class Not extends Matcher {
   }
 }
 
-class MirrorBar extends Boilerplate {
+class Bar extends Boilerplate {
   final int i;
-  MirrorBar(this.i);
+  Bar(this.i);
 }
 
-class MirrorFoo extends MirrorBar {
+class Foo extends Bar {
   final int j;
   final String s;
-  MirrorFoo(int i, this.j, this.s): super(i);
+  Foo(int i, this.j, this.s): super(i);
 }
 
-class MirrorBaz {
+class Baz {
   final int i;
-  MirrorBaz(this.i);
+  Baz(this.i);
 }
 
-class MirrorBam extends MirrorBaz with Boilerplate {
-  MirrorBam(int i): super(i);
+class Bam extends Baz with Boilerplate {
+  Bam(int i): super(i);
 }
 
-class MirrorEmpty extends Boilerplate {}
+class Empty extends Boilerplate {}
 
 class ColsBase {
   final List<int> intList;
@@ -84,10 +84,10 @@ void main() {
   group("Boilerplate", () {
     group("toString()", () {
       test("gives expected string on simple classes", () {
-        expect(new MirrorBar(1).toString(), equals("MirrorBar { i: 1 }"));
-        expect(new MirrorFoo(1, 2, "3").toString(), equals("MirrorFoo { i: 1, j: 2, s: 3 }"));
-        expect(new MirrorBam(1).toString(), equals("MirrorBam { i: 1 }"));
-        expect(new MirrorEmpty().toString(), equals("MirrorEmpty {  }"));
+        expect(new Bar(1).toString(), equals("Bar { i: 1 }"));
+        expect(new Foo(1, 2, "3").toString(), equals("Foo { i: 1, j: 2, s: 3 }"));
+        expect(new Bam(1).toString(), equals("Bam { i: 1 }"));
+        expect(new Empty().toString(), equals("Empty {  }"));
       });
       test("gives expected string on class with collections", () {
         var c = new ColsChild([1, 2], {"three": 4, "five": [6, 7]}, new Set.from(["8", "9"]), new Iterable.generate(2, (i) => i), null);
@@ -96,17 +96,17 @@ void main() {
     });
     group("hashCode", () {
       test("gives same value for same constructor params on simple classes", () {
-        expect(new MirrorBar(1).hashCode, equals(new MirrorBar(1).hashCode));
-        expect(new MirrorFoo(1, 2, "3").hashCode, equals(new MirrorFoo(1, 2, "3").hashCode));
-        expect(new MirrorBam(1).hashCode, equals(new MirrorBam(1).hashCode));
-        expect(new MirrorEmpty().hashCode, equals(new MirrorEmpty().hashCode));
+        expect(new Bar(1).hashCode, equals(new Bar(1).hashCode));
+        expect(new Foo(1, 2, "3").hashCode, equals(new Foo(1, 2, "3").hashCode));
+        expect(new Bam(1).hashCode, equals(new Bam(1).hashCode));
+        expect(new Empty().hashCode, equals(new Empty().hashCode));
       });
       test("gives different values for different constructor params on simple classes", () {
-        expect(new MirrorBar(1).hashCode, isDifferent(new MirrorBar(2).hashCode));
-        expect(new MirrorFoo(1, 2, "3").hashCode, isDifferent(new MirrorFoo(2, 2, "3").hashCode));
-        expect(new MirrorFoo(1, 2, "3").hashCode, isDifferent(new MirrorFoo(1, 3, "3").hashCode));
-        expect(new MirrorFoo(1, 2, "3").hashCode, isDifferent(new MirrorFoo(1, 2, "4").hashCode));
-        expect(new MirrorBam(1).hashCode, isDifferent(new MirrorBam(2).hashCode));
+        expect(new Bar(1).hashCode, isDifferent(new Bar(2).hashCode));
+        expect(new Foo(1, 2, "3").hashCode, isDifferent(new Foo(2, 2, "3").hashCode));
+        expect(new Foo(1, 2, "3").hashCode, isDifferent(new Foo(1, 3, "3").hashCode));
+        expect(new Foo(1, 2, "3").hashCode, isDifferent(new Foo(1, 2, "4").hashCode));
+        expect(new Bam(1).hashCode, isDifferent(new Bam(2).hashCode));
       });
       test("gives same value for same constructor params on class with collections", () {
         expect(new ColsChild([1, 2], {"three": 4, "five": [6, 7]}, new Set.from(["8", "9"]), new Iterable.generate(2, (i) => i), null).hashCode,
@@ -129,17 +129,17 @@ void main() {
     });
     group("operator==", () {
       test("equals other instance with same constructor params on simple classes", () {
-        expect(new MirrorBar(1), equals(new MirrorBar(1)));
-        expect(new MirrorFoo(1, 2, "3"), equals(new MirrorFoo(1, 2, "3")));
-        expect(new MirrorBam(1), equals(new MirrorBam(1)));
-        expect(new MirrorEmpty(), equals(new MirrorEmpty()));
+        expect(new Bar(1), equals(new Bar(1)));
+        expect(new Foo(1, 2, "3"), equals(new Foo(1, 2, "3")));
+        expect(new Bam(1), equals(new Bam(1)));
+        expect(new Empty(), equals(new Empty()));
       });
       test("does not equal other instance with same constructor params on simple classes", () {
-        expect(new MirrorBar(1), isDifferent(new MirrorBar(2)));
-        expect(new MirrorFoo(1, 2, "3"), isDifferent(new MirrorFoo(2, 2, "3")));
-        expect(new MirrorFoo(1, 2, "3"), isDifferent(new MirrorFoo(1, 3, "3")));
-        expect(new MirrorFoo(1, 2, "3"), isDifferent(new MirrorFoo(1, 2, "4")));
-        expect(new MirrorBam(1), isDifferent(new MirrorBam(2)));
+        expect(new Bar(1), isDifferent(new Bar(2)));
+        expect(new Foo(1, 2, "3"), isDifferent(new Foo(2, 2, "3")));
+        expect(new Foo(1, 2, "3"), isDifferent(new Foo(1, 3, "3")));
+        expect(new Foo(1, 2, "3"), isDifferent(new Foo(1, 2, "4")));
+        expect(new Bam(1), isDifferent(new Bam(2)));
       });
       test("equals other instance with same constructor params on class with collections", () {
         expect(new ColsChild([1, 2], {"three": 4, "five": [6, 7]}, new Set.from(["8", "9"]), new Iterable.generate(2, (i) => i), null),
@@ -163,23 +163,23 @@ void main() {
 
     group("copy", () {
       test("returns distinct by equal instance", () {
-        var original = new MirrorBar(1);
+        var original = new Bar(1);
         var copy = original.copy();
         expect(original, equals(copy));
         expect(original, new Not(same(copy)));
       });
       test("returns expected copy", () {
-        var original = new MirrorBar(1);
-        expect(new MirrorBar(2), equals(original.copy(i: 2)));
+        var original = new Bar(1);
+        expect(new Bar(2), equals(original.copy(i: 2)));
         
-        original = new MirrorFoo(1, 2, "3");
-        expect(new MirrorFoo(10, 2, "3"), equals(original.copy(i: 10)));
-        expect(new MirrorFoo(1, 20, "3"), equals(original.copy(j: 20)));
-        expect(new MirrorFoo(1, 2, "30"), equals(original.copy(s: "30")));
+        original = new Foo(1, 2, "3");
+        expect(new Foo(10, 2, "3"), equals(original.copy(i: 10)));
+        expect(new Foo(1, 20, "3"), equals(original.copy(j: 20)));
+        expect(new Foo(1, 2, "30"), equals(original.copy(s: "30")));
 
-        expect(new MirrorFoo(10, 20, "3"), equals(original.copy(i: 10, j: 20)));
-        expect(new MirrorFoo(10, 2, "30"), equals(original.copy(i: 10, s: "30")));
-        expect(new MirrorFoo(10, 20, "30"), equals(original.copy(i: 10, j: 20, s: "30")));
+        expect(new Foo(10, 20, "3"), equals(original.copy(i: 10, j: 20)));
+        expect(new Foo(10, 2, "30"), equals(original.copy(i: 10, s: "30")));
+        expect(new Foo(10, 20, "30"), equals(original.copy(i: 10, j: 20, s: "30")));
       });
 
       test("supports combinations of positional and named constructor arguments", () {
