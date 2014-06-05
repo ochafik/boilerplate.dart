@@ -6,8 +6,13 @@ No-brainer Dart helpers for boilerplate methods implementation ([get it with pub
       final List<int> js;  // with no extra effort.
       Foo(this.i, this.j);
     }
-    assert(new Foo(1, [2, 3]) == new Foo(1, [2, 3]));
-    
+    var foo = new Foo(1, [2, 3]);
+    assert(foo == new Foo(1, [2, 3]));
+    print(foo);                 // "Foo { i: 1, js: [2, 3] }"
+    print(foo.copy(i: js: [])); // "Foo { i: 1, js: [] }"
+
+Brings Dart classes closer to Scala case classes (although immutability is not enforced).
+
 # What is Boilerplate?
 
 `Boilerplate` saves you those cumbersome and error-prone [hashCode](https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart-core.Object#id_hashCode), [operator==](https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart-core.Object#id_==) and [toString](https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart-core.Object#id_toString) methods in Dart.
@@ -15,7 +20,10 @@ No-brainer Dart helpers for boilerplate methods implementation ([get it with pub
 It implements them by passing the *public fields* values through to [collection/equality.dart](https://github.com/dart-lang/bleeding_edge/tree/master/dart/pkg/collection), which performs the equality / hashing / toString for us.
 
 There's two variants:
-* `Boilerplate` uses mirrors to get the list of fields and their values. This means you need to preserve metadata of your class with `@MirrorsUsed` annotations (see example below).
+* `Boilerplate` uses mirrors to get the list of fields and their values.
+  This means you need to preserve metadata of your class with `@MirrorsUsed` annotations (see example below).
+  `Boilerplate` also adds a `copy` method as in Scala case classes, which creates a copy with the default constructor using the same field values as the original, except for the named argument overrides.
+
 * `ExplicitBoilerplate` requires you to specify the fields and class name explicitly. It doesn't use mirrors but some boilerplate is needed (although smaller than the methods it helps implement).
 
 # Limitations
