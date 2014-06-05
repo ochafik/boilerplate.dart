@@ -94,11 +94,12 @@ class Foo extends Bar {
 
 ## Boilerplate can be mixed in
 
-Note that `Boilerplate` and `ExplicitBoileplate` can be safely mixed in at any level of the class hierarchy:
+Note that `Boilerplate` and `ExplicitBoileplate` can be safely mixed in at any level of the class hierarchy (they're only needed at the top, though):
 
 ```java
 class A extends Boilerplate {}
 class B extends A with Boilerplate {}
+class C extends A {} // Still okay.
 ```
 
 # TODO
