@@ -162,7 +162,7 @@ void main() {
     });
 
     group("copy", () {
-      test("returns distinct by equal instance", () {
+      test("returns distinct but equal instance", () {
         var original = new Bar(1);
         var copy = original.copy();
         expect(original, equals(copy));
