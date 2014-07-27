@@ -5,6 +5,8 @@ description: A simple Boilerplate mixin that implements hashCode, operator== and
 homepage: https://github.com/ochafik/boilerplate.dart
 documentation: https://github.com/ochafik/boilerplate.dart
 dependencies:
+  barback: any
+  code_transformers: any
   collection: '>=0.9.3+1 <0.10.0'
 dev_dependencies:
   unittest: '>=0.11.0+1'

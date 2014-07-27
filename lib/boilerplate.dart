@@ -13,6 +13,7 @@ library boilerplate.mirrors;
 import 'dart:mirrors';
 
 import 'boilerplate_utils.dart';
+export 'boilerplate_utils.dart';
 
 part 'copier.dart';
 part 'mirror_utils.dart';
